@@ -10,4 +10,4 @@ const icon = () => (
  
 )
 
-export default icon
+export default icon;
