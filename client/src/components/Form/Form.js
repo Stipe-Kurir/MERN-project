@@ -5,6 +5,7 @@ import FileBase from 'react-file-base64';
 import {useDispatch} from 'react-redux';
 import { createPost , updatePost } from "../../actions/posts";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -22,6 +23,7 @@ const Form = ({currentId, setCurrentId}) => {
   const classes=useStyles();
   const dispatch=useDispatch();
   const user=JSON.parse(localStorage.getItem('profile'));
+  const navigate=useNavigate();
 
   useEffect(() => {
     if(post) 
@@ -35,10 +37,12 @@ const Form = ({currentId, setCurrentId}) => {
     if(currentId)
     {
       dispatch(updatePost(currentId,{...postData, name: user?.result?.name }));
+     
       clear();
     }
     else{
       dispatch(createPost({...postData, name: user?.result?.name}));
+      navigate("/");
       clear();
     }
 
