@@ -34,14 +34,13 @@ const Navbar = () =>{
     if(token){
         const decodedToken =decode(token);
         if(decodedToken.exp * 1000 < new Date().getTime()) logout();
-        
-    }
     
+    }
    },[location]);
 
 
     return (
-    <AppBar className={classes.appBar} position="static" color="inherit">
+    <AppBar className={classes.appBar} position="static" color="inherit" >
         <Link to="/" className={classes.brandContainer}>
        <img  src={memoriesText} alt="icon" height="45px"/>
         <img className={classes.image} src={memories} alt="memories" height="60" />

@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
+
 const Form = ({currentId, setCurrentId}) => {
 
   const [postData, setPostData] =useState({
@@ -19,7 +20,7 @@ const Form = ({currentId, setCurrentId}) => {
 
   });
 
-  const post=useSelector((state) => (currentId ? state.posts.find((p) => p._id === currentId ) : null));
+  const post=useSelector((state) => (currentId ? state.posts.posts.find((p) => p._id === currentId ) : null));
   const classes=useStyles();
   const dispatch=useDispatch();
   const user=JSON.parse(localStorage.getItem('profile'));

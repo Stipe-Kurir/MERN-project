@@ -13,7 +13,7 @@ const user=JSON.parse(localStorage.getItem('profile'));
 
 return(
 <BrowserRouter>
-    <Container maxwidth="xl">
+    <Container  maxwidth="xl">
       <Navbar />
       <Routes>
         <Route  path="/" element={<Navigate to='/posts' />} />
