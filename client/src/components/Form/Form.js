@@ -42,8 +42,8 @@ const Form = ({currentId, setCurrentId}) => {
       clear();
     }
     else{
-      dispatch(createPost({...postData, name: user?.result?.name}));
-      navigate("/");
+      dispatch(createPost({...postData, name: user?.result?.name},navigate));
+     
       clear();
     }
 
@@ -71,30 +71,36 @@ const Form = ({currentId, setCurrentId}) => {
     )
   }
     return(
-      <Paper className={classes.paper}>
+      <Paper className={classes.paper} elevation={6}>
         <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
     <Typography variant="h6"> {currentId ? 'Editing':'Creating'} a Memory</Typography>
 
-       <TextField name="title" 
+       <TextField 
+       style={{margin:'5px 0'}}
+       name="title" 
       variant="outlined" 
       label="Title" 
       fullWidth 
       value={postData.title}
       onChange={(e)=>setPostData({...postData, title:e.target.value})}
       />
-       <TextField name="message" 
-      variant="outlined" 
-      label="Message" 
-      fullWidth 
-      value={postData.message}
-      onChange={(e)=>setPostData({...postData, message:e.target.value})}
+       <TextField 
+       style={{margin:'5px 0'}}
+       name="message" 
+       variant="outlined" 
+       label="Message" 
+       fullWidth 
+       value={postData.message}
+       onChange={(e)=>setPostData({...postData, message:e.target.value})}
       />
-       <TextField name="tags" 
-      variant="outlined" 
-      label="Tags" 
-      fullWidth 
-      value={postData.tags}
-      onChange={(e)=>setPostData({...postData, tags:e.target.value.split(',')})}
+       <TextField 
+        style={{margin:'5px 0'}}
+        name="tags" 
+        variant="outlined" 
+        label="Tags" 
+        fullWidth 
+        value={postData.tags}
+        onChange={(e)=>setPostData({...postData, tags:e.target.value.split(',')})}
       />
       <div className={classes.fileInput}>
         <FileBase

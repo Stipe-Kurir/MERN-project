@@ -4,26 +4,48 @@ import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { useParams, useNavigate } from 'react-router-dom';
 import useStyles from './styles';
-import {getPost} from '../../actions/posts'
+import {getPost, getPostsBySearch} from '../../actions/posts'
+
+
 
 const PostDetails = () => {
 
-  const {post,posts} = useSelector((state)=> state.posts);
+  const {post,posts, isLoading} = useSelector((state)=> state.posts);
   const dispatch=useDispatch();
   const navigate=useNavigate();
   const classes=useStyles();
   const {id}=useParams();
 
+
   useEffect(()=>{
     dispatch(getPost(id));
   },[id])
 
+  useEffect(()=>{
+    if(post)
+    {
+    dispatch(getPostsBySearch({serach:'none',tags:post?.tags.join(',')}));
+    }
+  },[post])
+
+
+
 if(!post) return null;
 
+const recommendedPosts=posts.filter(({_id})=> _id !== post._id);
+const openPost=(_id)=> navigate(`/posts/${_id}`);
+
+if (isLoading) {
+  return (
+    <Paper elevation={6} className={classes.loadingPaper}>
+      <CircularProgress size="7em" />
+    </Paper>
+  );
+}
 
   return (
 
-    <Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>
+    <Paper style={{ padding: '20px', borderRadius: '15px'  }} elevation={6}>
     
     <div className={classes.card}>
       <div className={classes.section}>
@@ -42,7 +64,25 @@ if(!post) return null;
         <img className={classes.media} src={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} alt={post.title} />
       </div>
     </div>
+    {recommendedPosts.length && (
+      <div className={classes.section}  >
+        <Typography gutterBottom variant="h5">You might also like:</Typography>
+        <Divider />
+        <div className={classes.recommendedPosts} >
+          {recommendedPosts.map(({title, message, name, likes, selectedFile, _id})=>(
+            <div className={classes.recPost} style={{margin:'20px 30px'}} onClick={()=>openPost(_id)} key={_id}>
+              <Typography gutterBottom variant="h6">{title}</Typography>
+              <Typography gutterBottom variant="subtitle2">{name}</Typography>
+              <Typography gutterBottom variant="subtitle2">{message}</Typography>
+              <Typography gutterBottom variant="subtitle1">Likes: {likes.length}</Typography>
+              <img src={selectedFile} width="200px"/>
+            </div>
 
+          ))}
+        </div>
+
+      </div>
+    )}
 
 
       </Paper>

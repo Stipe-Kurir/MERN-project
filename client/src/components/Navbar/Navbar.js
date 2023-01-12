@@ -20,10 +20,10 @@ const Navbar = () =>{
 
    const logout = () => {
     dispatch({ type: 'LOGOUT' });
-
+    setUser(null);
     navigate("/");
    
-    setUser(null);
+  
     
   };
 

@@ -36,4 +36,10 @@ export default makeStyles((theme) => ({
   loadingPaper: {
     display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px', borderRadius: '15px', height: '39vh',
   },
+  recPost:{
+    "&:hover": {
+      transform: 'scale(1.1)',
+      cursor: 'pointer',
+    },
+  }
 }));

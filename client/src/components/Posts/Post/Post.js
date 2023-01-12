@@ -39,7 +39,7 @@ const Post = ({post , setCurrentId}) => {
 
   return (
 
-    <Card className={classes.card} raised elevation={6}>
+    <Card className={classes.card} raised elevation={6} >
      
      <div onClick={openPost} className={classes.hover}>
      
@@ -90,48 +90,3 @@ const Post = ({post , setCurrentId}) => {
 
 export default Post;
 
-/*  return(
-      <Card className={classes.card} raised elevation={6}>
-       <ButtonBase
-       component="span"
-       className={classes.cardActions}
-       onClick={openPost}
-       >
-        <CardMedia className={classes.media} image={post.selectedFile} title={post.title} />
-          <div className={classes.overlay} >
-            <Typography variant="h6" >{post.name}</Typography>
-            <Typography variant="body2" >{moment(post.createdAt).fromNow()}</Typography>
-
-          </div>
-       {(user?.result?._id === post?.creator) && (<div className={classes.overlay2} name="edit">
-  <Button style={{color: 'white'}}  
-  size="small"  onClick={() => setCurrentId(post._id)}>
-    <MoreHorizIcon fontSize="medium" />
-  </Button>
-</div>
-       )}   
-
-<div className={classes.details}>
-<Typography variant="body2"  color="textSecondary">{post.tags.map((tag)=> `#${tag} ` )}</Typography>
-</div>
-<Typography className={classes.title} variant="h5" gutterBottom >{post.title}</Typography>
-<CardContent>
-<Typography  variant="body2" color="textSecondary" component="p" >{post.message}</Typography>
-</CardContent>
-</ButtonBase>
-
-<CardActions className={classes.cardActions}>
-  <Button size="small" color="primary" disabled={!user?.result} onClick={()=> dispatch(likePost(post._id))}>
-    <Likes />
-    </Button>
-    {(user?.result?._id === post?.creator) && (
-      <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
-      <DeleteIcon fontSize="small" />  
-       Delete
-      </Button>
-    )}
-
-</CardActions>
-      </Card>
-    );
-} */

@@ -20,7 +20,11 @@ export default makeStyles({
     justifyContent: 'space-between',
     borderRadius: '15px',
     height: '100%',
-    position: 'relative',
+    position: 'relative', 
+    "&:hover": {
+      transform: 'scale(1.1)',
+      cursor: 'pointer',
+    }
   },
   overlay: {
     position: 'absolute',
@@ -50,10 +54,5 @@ export default makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
   },
-  hover: {
-    "&:hover": {
-      backgroundColor: '#F0FFFF',
-      cursor: 'pointer',
-    }
-  },
+  
 });
