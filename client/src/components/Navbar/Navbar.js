@@ -21,11 +21,8 @@ const Navbar = () =>{
    const logout = () => {
     dispatch({ type: 'LOGOUT' });
     setUser(null);
-    navigate("/");
-   
-  
-    
-  };
+    navigate("/auth"); 
+    };
 
    useEffect(() =>{
     const token =user?.token;

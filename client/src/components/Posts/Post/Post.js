@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import useStyles from './styles';
 import {  Card, CardActions, CardContent, CardMedia, Button, Typography  } from "@material-ui/core";
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import {deletePost, likePost} from '../../../actions/posts';
 import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
 import {useNavigate} from 'react-router-dom';
-import ButtonBase from "@material-ui/core/ButtonBase";
+
 
 
 
@@ -20,6 +20,20 @@ const Post = ({post , setCurrentId}) => {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem('profile'));
   const navigate=useNavigate();
+
+
+  const [likes,setLikes]=useState(post?.likes);
+  const hasLikedPost=post.likes.find((like) => like === ( user?.result?._id));
+  
+  const handleLike=async()=>{
+    dispatch(likePost(post._id));
+   if( hasLikedPost){
+    setLikes(post.likes.filter((id)=> id!==(user?.result?._id) ))
+   }else{
+    setLikes([...post.likes,user?.result?._id ]);
+   }
+
+  }
 
   const openPost =()=>{
     navigate(`/posts/${post._id}`);
@@ -73,7 +87,7 @@ const Post = ({post , setCurrentId}) => {
         </div>
   
       <CardActions className={classes.cardActions}>
-        <Button size="small" color="primary" disabled={!user?.result} onClick={() => dispatch(likePost(post._id))}>
+        <Button size="small" color="primary" disabled={!user?.result} onClick={handleLike}>
           <Likes />
         </Button>
         {( user?.result?._id === post?.creator) && (

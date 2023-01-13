@@ -23,6 +23,8 @@ export default makeStyles((theme) => ({
   },
   imageSection: {
     marginLeft: '20px',
+    width: '500px',
+    height: '600px',
     [theme.breakpoints.down('sm')]: {
       marginLeft: 0,
     },
@@ -41,5 +43,14 @@ export default makeStyles((theme) => ({
       transform: 'scale(1.1)',
       cursor: 'pointer',
     },
-  }
+  },
+    commentsOuterContainer:{
+      display:'flex',
+      justifyContent:'space-between',
+    },
+    commentsInnerContainer:{
+      height:'200px',
+      overflow:'auto',
+      marginRight:'30px',
+    },
 }));
