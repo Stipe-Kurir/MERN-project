@@ -18,6 +18,10 @@ const Navbar = () =>{
   const [user,setUser]=useState(JSON.parse(localStorage.getItem('profile')));
    console.log(user);
 
+    const signIn = () =>{
+        navigate("/auth"); 
+    }
+
    const logout = () => {
     dispatch({ type: 'LOGOUT' });
     setUser(null);
@@ -51,7 +55,7 @@ const Navbar = () =>{
                     <Button variant="contained" className={classes.logout} color="secondary" onClick={logout}> Logout</Button>
                 </div>
             ) :(
-                <Button component={Link} to="/auth" variant="contained" color="primary"> Sign in</Button>
+                <Button  variant="contained" color="primary" onClick={signIn}> Sign in</Button>
             )
          }
         </Toolbar>
@@ -61,3 +65,6 @@ const Navbar = () =>{
     };
 
 export default Navbar;
+
+/*  <Button component={Link} to="/auth" variant="contained" color="primary"> Sign in</Button>*/
+/* provjeri ako radi onda objavi kao additional fix*/
